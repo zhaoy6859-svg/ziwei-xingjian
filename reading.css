@@ -1,0 +1,146 @@
+:root {
+  --faint: #8f8576;
+  --gold-soft: #d8bd8a;
+  --red-light: #c96b5f;
+  --line-soft: #2f2922;
+  --ink-soft: #171512;
+}
+
+/* 全盘解读新增组件。保留原站的水墨纸盘样式，只补足多维度阅读需要的结构。 */
+
+.landing-demo {
+  color: var(--muted); font-size: .84rem; letter-spacing: .08em;
+  text-decoration: underline; text-underline-offset: 5px;
+  margin-top: -8px;
+}
+.landing-demo:hover { color: var(--gold); }
+
+.folio-heading { align-items: flex-end; }
+.folio-title { display: grid; gap: 5px; }
+.folio-title p { color: var(--muted); font-size: .86rem; }
+.folio-tools { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.folio-tools .text-button { color: var(--gold); }
+.folio-tools .text-button:hover { color: var(--red-light); }
+
+.reading-toc {
+  position: sticky; top: 0; z-index: 6;
+  display: flex; gap: 2px; overflow-x: auto;
+  padding: 10px 0; margin: 6px 0 0;
+  border-bottom: 1px solid var(--line-soft);
+  background: #121212f2;
+  backdrop-filter: blur(8px);
+  scrollbar-width: none;
+}
+.reading-toc::-webkit-scrollbar { display: none; }
+.reading-toc a {
+  flex: none; padding: 4px 11px; border: 1px solid transparent;
+  color: var(--muted); font-size: .8rem; letter-spacing: .08em;
+}
+.reading-toc a:hover, .reading-toc a.current { color: var(--gold); border-color: var(--line); }
+
+.reading-group { margin-top: 38px; scroll-margin-top: 64px; }
+.group-heading {
+  display: flex; align-items: baseline; gap: 10px 16px; flex-wrap: wrap;
+  padding-bottom: 10px; border-bottom: 1px solid var(--gold);
+}
+.group-index { color: var(--red-light); font: 700 .78rem var(--kai); letter-spacing: .18em; }
+.group-heading h3 { color: var(--gold); font-size: clamp(1.34rem, 2.7vw, 1.72rem); }
+.group-heading p { color: var(--muted); font-size: .82rem; }
+.group-cards { display: block; }
+
+.reading-card {
+  grid-template-columns: minmax(150px, 196px) minmax(0, 1fr);
+  gap: 20px 34px;
+  scroll-margin-top: 64px;
+}
+.card-index { display: block; color: var(--red-light); font: 700 .76rem var(--kai); letter-spacing: .18em; margin-bottom: 2px; }
+.reading-card .card-rail h3 { color: var(--gold); font-size: 1.28rem; }
+.card-verdict { margin-top: 8px; color: #f0e6d7; font: 600 .96rem/1.72 var(--song); letter-spacing: .02em; }
+.reading-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1px; }
+.tag { border: 1px solid var(--line); color: var(--gold); font-size: .7rem; padding: 2px 7px; letter-spacing: .06em; }
+.reading-card .reading-basis { margin-top: 2px; }
+
+.group-cards.compact-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px; margin-top: 0; background: var(--line);
+  border: 1px solid var(--line); border-top: 0;
+}
+.reading-card.compact {
+  display: block; background: var(--ink);
+  border: 0; padding: 19px 20px 21px;
+}
+.reading-card.compact .card-rail { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.reading-card.compact .card-index { margin: 0; }
+.reading-card.compact h3 { font-size: 1.08rem; }
+.reading-card.compact .card-verdict { margin-top: 5px; font-size: .88rem; line-height: 1.7; }
+.reading-card.compact .reading-copy { max-width: none; gap: 8px; margin-top: 7px; }
+.reading-card.compact .reading-copy p { font-size: .9rem; line-height: 1.88; }
+.reading-card.compact .reading-basis { font-size: .76rem; }
+
+.reading-note {
+  margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--line-soft);
+  color: var(--muted); font-size: .8rem;
+}
+.noscript { padding: 18px; text-align: center; background: #8e2328; color: #fff3e2; }
+
+@media (max-width: 720px) {
+  .landing-demo { margin-top: -12px; }
+  .folio-heading { align-items: flex-start; }
+  .folio-tools { gap: 10px 14px; }
+  .reading-card { grid-template-columns: 1fr; gap: 7px; padding: 20px 0 22px; }
+  .card-verdict { margin-top: 5px; }
+  .group-cards.compact-grid { grid-template-columns: 1fr; }
+  .reading-group { margin-top: 30px; }
+  .reading-toc { margin-top: 2px; }
+}
+
+@media print {
+  body { background: #fff !important; color: #1a1a1a; }
+  .masthead, .landing, #work-nav, .input-card, .guide, footer, .reading-toc,
+  .reading-hint,
+  .folio-tools, .year-tools, .chart-header .modes, .chart-caption, .chart-empty,
+  .casting, .noscript { display: none !important; }
+  #workbench, #workbench[hidden], #reading, #reading[hidden] { display: block !important; }
+  .wrap { width: 100%; }
+  .work-heading { display: none; }
+  .workspace { display: block; margin: 0 0 16px; }
+  .paper { background: #fff; box-shadow: none; border-color: #bbb; }
+  .chart-card { padding: 0; border: 0; }
+  .chart-grid { max-width: 560px; margin-inline: auto; border-color: #999; }
+  .palace { background: #f7f3ea !important; }
+  .chart-center { background: #fbf8f0; }
+  .palace-detail { max-width: 560px; border-color: #ccc; }
+  .folio-heading { border-color: #8a6a38; }
+  .folio-title h2, .group-heading h3, .reading-card h3 { color: #6e4d20; }
+  .folio-title p, .group-heading p, .reading-note, .card-verdict { color: #333; }
+  .reading-group { margin-top: 16px; }
+  .group-heading { border-color: #8a6a38; break-after: avoid; }
+  .reading-card { display: block; padding: 10px 0; border-color: #ddd; break-inside: avoid; }
+  .card-index { color: #8a2a2a; }
+  .reading-copy p { color: #1a1a1a; line-height: 1.7; }
+  .reading-copy { max-width: none; }
+  .tag { color: #6e4d20; border-color: #bbb; }
+  .reading-list li { color: #333; border-color: #bbb; }
+  .reading-list strong { color: #6e4d20; }
+  .reading-basis { display: block; color: #666; }
+  .reading-basis summary { display: none; }
+  .reading-basis p { color: #666; }
+  .group-cards.compact-grid { display: block; border: 0; background: none; }
+  .reading-card.compact { background: none; }
+}
+
+/* 页眉小印：两字竖排，避免 34px 方块里挤成一行 */
+.brand-stamp {
+  width: 36px; height: 36px;
+  writing-mode: vertical-rl;
+  font-size: .78rem;
+  line-height: 1.05;
+  letter-spacing: .02em;
+}
+
+/* 程序化聚焦标题时不显示焦点框；标题本身不是交互控件 */
+#work-title:focus, #hero-title:focus { outline: none; }
+
+.chart-caption-right { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 3px 6px; }
+
+.reading-hint { margin: 10px 0 0; color: var(--faint); font-size: .8rem; line-height: 1.75; }
